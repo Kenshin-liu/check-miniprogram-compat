@@ -1,0 +1,17 @@
+{
+  "name": "check-miniprogram-compat",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "liudiguang",
+  "license": "ISC",
+  "dependencies": {
+    "miniprogram-compat": "^1.0.3"
+  },
+  "devDependencies": {
+    "typescript": "^4.6.3"
+  }
+}
