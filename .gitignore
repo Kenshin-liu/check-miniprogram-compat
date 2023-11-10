@@ -22,3 +22,4 @@ package-lock.json
 
 build/compat-table
 /dist
+/test
