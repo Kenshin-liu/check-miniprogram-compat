@@ -87,7 +87,7 @@ const _getSupportInfoMap = (jsonData, browsers, coreJsModules) => {
 };
 
 function _getMiniprogramPolyfillInfo(miniprogramVersion: string) {
-  const browsers = miniprogramCompat
+  const browserInfo = miniprogramCompat
     .getBrowsersList(miniprogramVersion)
     .reduce((browsers, info) => {
       const [browser, version] = info.split(' ');
@@ -104,7 +104,7 @@ function _getMiniprogramPolyfillInfo(miniprogramVersion: string) {
 
   const supportInfo = _getSupportInfoMap(
     require('@mdn/browser-compat-data').javascript,
-    browsers,
+    browserInfo,
     coreJsModules
   );
 
@@ -113,8 +113,7 @@ function _getMiniprogramPolyfillInfo(miniprogramVersion: string) {
 
 function _getCurUsePolyfills(code: string) {
   const curUsePolyfills = new Set();
-  const result = transformSync(code, {
-    ast: true,
+  transformSync(code, {
     presets: [
       [
         '@babel/preset-env',
@@ -170,7 +169,7 @@ function checkMiniprogramCompat(code: string, version: string): void {
     }
 
     if (!isSupport) {
-      console.log('featureKey 不支持', featureKey);
+      throw new Error(`${featureKey} 不支持`);
     }
   });
 }
